@@ -23,13 +23,5 @@ class Game:
     def run(self):
         while self.running:
             self.running = self.catch_events(pygame.event.get())
-
-            #Updating positions
-            self.ball.update()
-
-            #Rendering
             self.camera.show(self.screen)
             pygame.display.update()
-
-            #Wait
-            Game.time.tick(25)
