@@ -117,7 +117,7 @@ class Vec2D:
         :rtype: tuple
         """
         intversion = self.getInt()
-        return intversion.x, intversion.y
+        return (intversion.x, intversion.y)
 
     def getInt(self):
         """

@@ -1,6 +1,7 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 
 class Renderable:
+    __metaclass__ = ABCMeta
 
     @abstractmethod
     def show(self, screen):
