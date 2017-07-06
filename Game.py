@@ -3,6 +3,7 @@ from VecMath import Vec2D
 
 class Game:
     time = pygame.time.Clock()
+    UPDATE_SPEED = 0.001
 
     def __init__(self, window_dimension=None):
         from Camera import Camera
