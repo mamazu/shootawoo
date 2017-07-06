@@ -1,4 +1,5 @@
 import pygame
+from Camera import Renderable
 from VecMath import Vec2D
 
 class Game:
@@ -10,9 +11,11 @@ class Game:
         from Player import Ball
         self.window_dimension = window_dimension if window_dimension is not None else Vec2D(800, 600)
         self.screen = pygame.display.set_mode(self.window_dimension.getTuple())
+        self.platform = Platform()
         self.camera = Camera()
         self.ball = Ball()
         self.camera.add(self.ball)
+        self.camera.add(self.platform)
         self.running = True
         self.run()
 
@@ -37,3 +40,9 @@ class Game:
             # Showing objects on the screen
             self.camera.show(self.screen)
             pygame.display.update()
+
+
+class Platform(Renderable):
+
+    def show(self, screen):
+        pygame.draw.rect(screen, (0,0,0), (0, 400, 100, 200))
