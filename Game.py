@@ -1,5 +1,7 @@
 import pygame
+
 from VecMath import Vec2D
+
 
 class Game:
     time = pygame.time.Clock()

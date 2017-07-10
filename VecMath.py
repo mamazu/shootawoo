@@ -20,7 +20,7 @@ class Vec2D:
 
     def __add__(self, other):
         """
-        Adds two vectors componentwise and adds a scale and a vector
+        Adds two vectors component wise and adds a scale and a vector
         :param other: Second part of the sum
         :type other: int, float, Vec2D
         :return: Returns the sum
@@ -51,7 +51,7 @@ class Vec2D:
         """
         Multiplies an int with a vector with a number or a vector.
         If the parameter other is a number it, scalar multiplication will be applied.
-        If the parameter is a vector the componetns will be multiplied one by one.
+        If the parameter is a vector the components will be multiplied one by one.
         :type other: int, float, Vec2D
         :rtype: Vec2D
         """
@@ -116,8 +116,8 @@ class Vec2D:
         Returns the tuple of the vector
         :rtype: tuple
         """
-        intversion = self.getInt()
-        return (intversion.x, intversion.y)
+        int_version = self.getInt()
+        return int_version.x, int_version.y
 
     def getInt(self):
         """
@@ -128,7 +128,7 @@ class Vec2D:
 
     def getLength(self):
         import math
-        return math.sqrt(self.x**2 + self.y**2)
+        return math.sqrt(self.x ** 2 + self.y ** 2)
 
     def set(self, value):
         """

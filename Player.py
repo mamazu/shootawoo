@@ -1,9 +1,10 @@
 import Physics
+from pygame.draw import circle
 
-from Game import Game
 from Camera import Renderable
-from pygame.draw import circle, rect
+from Game import Game
 from VecMath import Vec2D
+
 
 class Ball(Renderable):
     def __init__(self):

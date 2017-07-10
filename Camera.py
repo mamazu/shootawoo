@@ -1,11 +1,13 @@
 from abc import abstractmethod, ABCMeta
 
+
 class Renderable:
     __metaclass__ = ABCMeta
 
     @abstractmethod
     def show(self, screen):
         print('Implement show method')
+
 
 class Camera(Renderable):
     def __init__(self):
