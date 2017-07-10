@@ -1,9 +1,9 @@
-import Physics
+from mechanics.Camera import Renderable
 from pygame.draw import circle
 
-from Camera import Renderable
 from Game import Game
-from VecMath import Vec2D
+from mechanics import Physics
+from tools.VecMath import Vec2D
 
 
 class Ball(Renderable):
@@ -21,5 +21,6 @@ class Ball(Renderable):
         if window_dimension.y < self.position.y + self.radius:
             self.speed.y *= -Physics.JUMP_DRAG
 
-    def show(self, screen):
-        circle(screen, (255, 0, 0), self.position.getTuple(), self.radius)
+    def show(self, screen, offset):
+        position = self.position - offset
+        circle(screen, (255, 0, 0), position.getTuple(), self.radius)

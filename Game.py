@@ -1,6 +1,6 @@
 import pygame
 
-from VecMath import Vec2D
+from tools.VecMath import Vec2D
 
 
 class Game:
@@ -8,15 +8,21 @@ class Game:
     UPDATE_SPEED = 0.001
 
     def __init__(self, window_dimension=None):
-        from Camera import Camera
+        from mechanics.Camera import Camera
         from Player import Ball
+        from mechanics.Obstacles import Platform
         self.window_dimension = window_dimension if window_dimension is not None else Vec2D(800, 600)
         self.screen = pygame.display.set_mode(self.window_dimension.getTuple())
         self.camera = Camera()
         self.ball = Ball()
-        self.camera.add(self.ball)
+        self.platform = Platform()
+        self.camera_setup()
         self.running = True
         self.run()
+
+    def camera_setup(self):
+        self.camera.add(self.ball)
+        self.camera.add(self.platform)
 
     def catch_events(self, event_list):
         for event in event_list:
@@ -37,5 +43,6 @@ class Game:
             self.ball.constrain(self.window_dimension)
 
             # Showing objects on the screen
-            self.camera.show(self.screen)
+            self.camera.show(self.screen, Vec2D(0, 0))
+            self.camera.update()
             pygame.display.update()
