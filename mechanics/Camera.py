@@ -1,6 +1,5 @@
 from abc import abstractmethod, ABCMeta
 
-from Game import Game
 from tools.VecMath import Vec2D
 
 
@@ -13,9 +12,10 @@ class Renderable:
 
 
 class Camera(Renderable):
-    def __init__(self):
+    def __init__(self, size):
         self.background = (0, 128, 0)
         self.position = Vec2D(0, 0)
+        self.size = size
         self.objects = []
         self.center_object = None
 
@@ -32,4 +32,16 @@ class Camera(Renderable):
             obj.show(screen, offset)
 
     def update(self):
-        self.position += Vec2D(50 * Game.UPDATE_SPEED, 0)
+        if self.center_object is None:
+            return
+        ball_center = self.center_object.get_center()
+        new_position = ball_center - self.size / 2
+        new_position.clamp_y(None, 20)
+        self.smooth_update(new_position, .01)
+
+    def smooth_update(self, new_position, speed):
+        distance = new_position - self.position
+        self.position += distance * speed
+
+    def set_center(self, center_object):
+        self.center_object = center_object

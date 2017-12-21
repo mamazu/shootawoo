@@ -111,24 +111,52 @@ class Vec2D:
     def __len__(self):
         return 2
 
-    def getTuple(self):
+    def get_tuple(self):
         """
         Returns the tuple of the vector
         :rtype: tuple
         """
-        int_version = self.getInt()
+        int_version = self.get_int()
         return int_version.x, int_version.y
 
-    def getInt(self):
+    def get_int(self):
         """
         Returns the integer version of the vector.
         :rtype: Vec2D
         """
         return Vec2D(int(self.x), int(self.y))
 
-    def getLength(self):
+    def get_length(self):
+        """
+        :return: the length of the vector
+        :rtype: float
+        """
         import math
         return math.sqrt(self.x ** 2 + self.y ** 2)
+
+    def clamp_x(self, low=None, high=None):
+        """
+        Clamps the x value between a low and a high value
+        :param low: Lower value to clamp
+        :param high: Higher value to clamp
+        :return: None
+        """
+        if low is not None and self.x < low:
+            self.x = low
+        if high is not None and self.x > high:
+            self.x = high
+
+    def clamp_y(self, low=None, high=None):
+        """
+        Clamps the y value between a low and a high value
+        :param low: Lower value to clamp
+        :param high: Higher value to clamp
+        :return: None
+        """
+        if low is not None and self.y < low:
+            self.y = low
+        if high is not None and self.y > high:
+            self.y = high
 
     def set(self, value):
         """

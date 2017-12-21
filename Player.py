@@ -6,11 +6,11 @@ from mechanics import Physics
 from tools.VecMath import Vec2D
 
 
-class Ball(Renderable):
+class Player(Renderable):
     def __init__(self):
         self.position = Vec2D(100, 200)
         self.speed = Vec2D(100, 0) * Game.UPDATE_SPEED
-        self.acceleration = Vec2D(0, 1) * Game.UPDATE_SPEED
+        self.acceleration = Vec2D(0, 0.1) * Game.UPDATE_SPEED
         self.radius = 30
 
     def update(self):
@@ -21,6 +21,9 @@ class Ball(Renderable):
         if window_dimension.y < self.position.y + self.radius:
             self.speed.y *= -Physics.JUMP_DRAG
 
+    def get_center(self):
+        return self.position
+
     def show(self, screen, offset):
         position = self.position - offset
-        circle(screen, (255, 0, 0), position.getTuple(), self.radius)
+        circle(screen, (255, 0, 0), position.get_tuple(), self.radius)

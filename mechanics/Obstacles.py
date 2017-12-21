@@ -10,5 +10,5 @@ class Platform(Renderable):
         self.position = Vec2D(0, 400)
 
     def show(self, screen, offset):
-        posX, posY = (self.position - offset).getTuple()
-        rect(screen, (0, 0, 0), (posX, posY, 100, 300))
+        pos_x, pos_y = (self.position - offset).get_tuple()
+        rect(screen, (0, 0, 0), (pos_x, pos_y, 100, 300))
