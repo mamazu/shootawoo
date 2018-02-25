@@ -10,19 +10,19 @@ class Game:
     def __init__(self, window_dimension=None):
         from mechanics.Camera import Camera
         from Player import Player
-        from mechanics.Obstacles import Platform
+        from mechanics.Obstacles import Level
         self.window_dimension = window_dimension if window_dimension is not None else Vec2D(800, 600)
         self.screen = pygame.display.set_mode(self.window_dimension.get_tuple())
         self.camera = Camera(self.window_dimension)
+        self.level = Level(self.window_dimension)
         self.player = Player()
-        self.platform = Platform()
         self.camera_setup()
         self.running = True
         self.run()
 
     def camera_setup(self):
         self.camera.add(self.player)
-        self.camera.add(self.platform)
+        self.camera.add(self.level)
         self.camera.set_center(self.player)
 
     def catch_events(self, event_list):
@@ -42,6 +42,8 @@ class Game:
             # Updating positions
             self.player.update()
             self.player.constrain(self.window_dimension)
+
+            self.level.update()
 
             # Showing objects on the screen
             self.camera.show(self.screen, Vec2D(0, 0))

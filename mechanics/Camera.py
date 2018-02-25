@@ -34,9 +34,10 @@ class Camera(Renderable):
     def update(self):
         if self.center_object is None:
             return
-        ball_center = self.center_object.get_center()
+        ball_center = self.center_object.get_center()  # type: Vec2D
         new_position = ball_center - self.size / 2
-        new_position.clamp_y(None, 20)
+        new_position.clamp_y(None, 0)
+        new_position.clamp_x(0)
         self.smooth_update(new_position, .01)
 
     def smooth_update(self, new_position, speed):

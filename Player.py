@@ -9,8 +9,8 @@ from tools.VecMath import Vec2D
 class Player(Renderable):
     def __init__(self):
         self.position = Vec2D(100, 200)
-        self.speed = Vec2D(100, 0) * Game.UPDATE_SPEED
-        self.acceleration = Vec2D(0, 0.1) * Game.UPDATE_SPEED
+        self.speed = Vec2D(500, 0) * Game.UPDATE_SPEED
+        self.acceleration = Vec2D(0, 1) * Game.UPDATE_SPEED
         self.radius = 30
 
     def update(self):
