@@ -1,9 +1,9 @@
+from pygame.rect import Rect
 from tools.VecMath import Vec2D
-
 from pygame.draw import rect
-
 from Camera import Renderable
 from random import randrange
+
 
 class Block(Renderable):
     def __init__(self, position, size):
@@ -15,6 +15,16 @@ class Block(Renderable):
 
     def get_right_edge(self):
         return self.position + self.size
+
+    def collides(self, other_renerable):
+        self_rect = self.get_rect()
+        other_rect = other_renerable.get_rect()
+        if self_rect.colliderect(other_rect):
+            other_renerable.position.y = self_rect.top - other_rect.height
+            return other_rect.left + other_rect.width // 2 >= self_rect.left
+
+    def get_rect(self):
+        return Rect(self.position.get_tuple(), self.size.get_tuple())
 
     def show(self, screen, offset):
         pos_x, pos_y = (self.position - offset).get_tuple()
@@ -32,7 +42,6 @@ class Level(Renderable):
 
     def update(self):
         self.remove_invisible_blocks()
-        print(len(self.blocks))
 
         # Generate new platforms
         current = self.blocks[-1].get_right_edge().x
@@ -53,6 +62,13 @@ class Level(Renderable):
     def get_distance_between_blocks(self):
         difficulty = max(1.0, self.x_offset / 1000)
         return int(randrange(30, 70) * difficulty)
+
+    def collides(self, other_rederable):
+        for block in self.blocks:
+            if block.collides(other_rederable):
+                return True
+
+        return False
 
     def show(self, screen, offset):
         self.x_offset = offset.x

@@ -1,3 +1,5 @@
+from pygame.rect import Rect
+
 from mechanics.Camera import Renderable
 from pygame.draw import circle
 
@@ -19,7 +21,14 @@ class Player(Renderable):
 
     def constrain(self, window_dimension):
         if window_dimension.y < self.position.y + self.radius:
-            self.speed.y *= -Physics.JUMP_DRAG
+            self.bounce()
+
+    def get_rect(self):
+        top_left = self.position - self.radius
+        return Rect(top_left.get_tuple(), (self.radius*2, self.radius*2))
+
+    def bounce(self):
+        self.speed.y *= -Physics.JUMP_DRAG
 
     def get_center(self):
         return self.position

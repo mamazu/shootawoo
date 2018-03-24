@@ -41,7 +41,9 @@ class Game:
 
             # Updating positions
             self.player.update()
-            self.player.constrain(self.window_dimension)
+            # self.player.constrain(self.window_dimension)
+            if self.level.collides(self.player):
+                self.player.bounce()
 
             self.level.update()
 
